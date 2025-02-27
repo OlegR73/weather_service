@@ -7,7 +7,7 @@ import { useState } from "react";
 
 function App() {
   const [currentCity, setSelectedCity] = useState(cityArr[0]);
-  const [message, setMessage] = useState('Loading weather data...git.');
+  const [message, setMessage] = useState('Loading weather data...');
   return (
     <div>
       <Header />
