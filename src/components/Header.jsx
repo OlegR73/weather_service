@@ -1,0 +1,17 @@
+import { useState } from "react";
+import logo from "/logo_weather.svg";
+
+
+
+
+export default function Header() {
+  const [dateNow, setDateNow] = useState(new Date());
+ setInterval(() => setDateNow(new Date()),1000)
+  return (
+    <header>
+      <img src={logo} alt="" />
+      <h1>Weather Service</h1>
+      <span>Time: {dateNow.toLocaleTimeString()}</span>
+    </header>
+  );
+}
