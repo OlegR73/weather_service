@@ -2,14 +2,16 @@ import { useState, useEffect } from "react";
 import { useContext } from "react";
 import { InputSelectContext } from '../context/InputSelectContext.jsx';
 
-export default function WeatherData({message, setMessage }) {
+
+export default function WeatherData({message, setMessage}) {
+
     const [weatherData, setwWeatherData] = useState(null);
     const { currentCity } = useContext(InputSelectContext);
     
 
     const apiKey = '2d271a197ce5aef1db71479108ed9538';
-    console.log(currentCity);
-
+   
+    
     useEffect(() => {
         const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${currentCity}&appid=${apiKey}&units=metric`;
         setwWeatherData(null);

@@ -12,7 +12,7 @@ export default function InputCity() {
 
     return(
         <form action="" onSubmit={handleClick}>
-            <input type="text"  required />
+            <input type="text" required />
             <input className="button" type="submit" value="Submit" />
         </form>
         

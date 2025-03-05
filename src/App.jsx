@@ -2,7 +2,6 @@ import Header from "./components/Header.jsx";
 import Footer from "./components/Footer.jsx";
 import SideBar from "./components/SideBar.jsx";
 import WeatherContainer from "./components/WeatherContainer.jsx";
-import { cityArr } from "./weather_data.js";
 import { useState } from "react";
 import { InpSeLProvider } from "./context/InputSelectContext.jsx";
 

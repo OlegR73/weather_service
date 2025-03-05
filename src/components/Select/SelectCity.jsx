@@ -8,7 +8,7 @@ export default function SelectCity() {
   const { setSelectedCity } = useContext(InputSelectContext);
 
   function handleInput(e) {
-        setSelectedCity(e.target.value);   
+      setSelectedCity(e.target.value);   
   }
 
   return (

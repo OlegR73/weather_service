@@ -1,4 +1,6 @@
+import ChartBox from "./ChartBox.jsx";
 import WeatherData from "./WeatherData.jsx";
+
 
 export default function WeatherContainer({ message, setMessage }) {
   return (
@@ -7,7 +9,7 @@ export default function WeatherContainer({ message, setMessage }) {
         <WeatherData message={message} setMessage={setMessage} />
       </section>
       <section className="chart_box">
-         <p>Its place for chart</p>
+         <ChartBox message={message} />
       </section>
     </div>
   )
