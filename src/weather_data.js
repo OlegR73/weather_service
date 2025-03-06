@@ -7,9 +7,10 @@ export const cityArr = [
   "London",
   "New York",
   "Milan",
-  "Palermo",
+  "Mumbai",
   "Moscow",
   "Tbilisi",
-  "Athens",
-  "Osaka",
+  "Heraklion",
+  "Nairobi",
+  "Lima"
 ];

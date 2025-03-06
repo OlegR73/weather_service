@@ -32,11 +32,44 @@ export default function ChartBox({weatherData}) {
     return <p>No weather data available</p>;
   }
 
-  if (weatherData.city == "Rīga") {
-    temp = [0, 25, 22, 13, -19, 10, -4]
-  }else{
-    temp = [30, 25, 2, 1, -2, 0, -14];
+console.log(weatherData.city + " " + weatherData.temperature);
+  switch (weatherData.city) {
+    case "Rīga":
+      temp = [0, 25, 22, 13, -19, 10, weatherData.temperature];
+      break;
+    case "Ventspils":
+      temp = [0, 25, 22, 13, 5, 10, weatherData.temperature];
+      break;
+    case "Liepāja":
+      temp = [7, 5, -2, 13, 21, 11, weatherData.temperature];
+      break;
+    case "Tokyo":
+      temp = [10, 25, 2, -13, -9, 10, weatherData.temperature];
+      break;
+    case "Moscow":
+      temp = [11, 2, 22, -3, -14, -10, weatherData.temperature];
+      break;
+    case "Milan":
+      temp = [10, 25, 17, 13, 19, 10, weatherData.temperature];
+      break;
+    case "New York":
+      temp = [1, 21, 2, 13, -1, 5, weatherData.temperature];
+      break;
+    case "Osaka":
+      temp = [1, 20, 9, 13, -9, 4, weatherData.temperature];
+      break;
+    case "Athens":
+      temp = [6, 7, 15, -13, 9, -10, weatherData.temperature];
+      break;
+    case "Palermo":
+      temp = [22, -5, 12, 13, 0, 1, weatherData.temperature];
+      break;
+    default:
+      temp = [0, 2, 3, 13, -19, 16, weatherData.temperature];
+      break;
   }
+
+
   console.log(temp + ' - ' + weatherData.city);
 
 
