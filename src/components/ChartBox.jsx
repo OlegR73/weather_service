@@ -1,5 +1,5 @@
-import { useContext } from "react";
-import { InputSelectContext } from "../context/InputSelectContext";
+//import { useContext } from "react";
+//import { InputSelectContext } from "../context/InputSelectContext";
 import { Line } from "react-chartjs-2";
 import "chartjs-adapter-date-fns";
 import {
@@ -13,6 +13,7 @@ import {
   Legend,
   TimeScale,
 } from "chart.js";
+import WeatherData from "./WeatherData";
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -24,9 +25,20 @@ ChartJS.register(
   Legend
 );
 
-export default function ChartBox(props) {
-  console.log(props.weatherData);
-  const { currentCity } = useContext(InputSelectContext);
+export default function ChartBox({weatherData}) {
+  let temp = [];
+
+  if (!WeatherData) {
+    return <p>No weather data available</p>;
+  }
+
+  if (weatherData.city == "Rīga") {
+    temp = [0, 25, 22, 13, -19, 10, -4]
+  }else{
+    temp = [30, 25, 2, 1, -2, 0, -14];
+  }
+  console.log(temp + ' - ' + weatherData.city);
+
 
   const data = {
     labels: [
@@ -41,8 +53,8 @@ export default function ChartBox(props) {
     ],
     datasets: [
       {
-        label: `Temperature in ${currentCity}`,
-        data: [0, 5, 2, 1, -2, 0, -4],
+        label: `Temperature in ${weatherData.city}`,
+        data: temp,
         backgroundColor: "rgba(75,192,192,0.4)",
         borderColor: "rgba(75,192,192,1)",
         fill: false,
@@ -52,6 +64,10 @@ export default function ChartBox(props) {
 
   const options = {
     responsive: true,
+    animation: {
+      duration: 1000,
+      easing: 'easeOutQuad', 
+    },
     scales: {
       x: {
         type: "time",
