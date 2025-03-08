@@ -31,47 +31,45 @@ export default function ChartBox({weatherData}) {
   if (!WeatherData) {
     return <p>No weather data available</p>;
   }
+  let storedData = JSON.parse(localStorage.getItem(weatherData.city));
+  console.log( weatherData.city);
+  console.log(storedData);
 
-console.log(weatherData.city + " " + weatherData.temperature);
   switch (weatherData.city) {
     case "Rīga":
-      temp = [0, 25, 22, 13, -19, 10, weatherData.temperature];
+      temp = [0, 25, 22, 13, -19, 10, weatherData.temp];
       break;
     case "Ventspils":
-      temp = [0, 25, 22, 13, 5, 10, weatherData.temperature];
+      temp = [0, 25, 22, 13, 5, 10, weatherData.temp];
       break;
     case "Liepāja":
-      temp = [7, 5, -2, 13, 21, 11, weatherData.temperature];
+      temp = [7, 5, -2, 13, 21, 11, weatherData.temp];
       break;
     case "Tokyo":
-      temp = [10, 25, 2, -13, -9, 10, weatherData.temperature];
+      temp = [10, 25, 2, -13, -9, 10, weatherData.temp];
       break;
     case "Moscow":
-      temp = [11, 2, 22, -3, -14, -10, weatherData.temperature];
+      temp = [11, 2, 22, -3, -14, -10, weatherData.temp];
       break;
     case "Milan":
-      temp = [10, 25, 17, 13, 19, 10, weatherData.temperature];
+      temp = [10, 25, 17, 13, 19, 10, weatherData.temp];
       break;
     case "New York":
-      temp = [1, 21, 2, 13, -1, 5, weatherData.temperature];
+      temp = [1, 21, 2, 13, -1, 5, weatherData.temp];
       break;
     case "Osaka":
-      temp = [1, 20, 9, 13, -9, 4, weatherData.temperature];
+      temp = [1, 20, 9, 13, -9, 4, weatherData.temp];
       break;
     case "Athens":
-      temp = [6, 7, 15, -13, 9, -10, weatherData.temperature];
+      temp = [6, 7, 15, -13, 9, -10, weatherData.temp];
       break;
     case "Palermo":
-      temp = [22, -5, 12, 13, 0, 1, weatherData.temperature];
+      temp = [22, -5, 12, 13, 0, 1, weatherData.temp];
       break;
     default:
-      temp = [0, 2, 3, 13, -19, 16, weatherData.temperature];
+      temp = [0, 2, 3, 13, -19, 16, weatherData.temp];
       break;
   }
-
-
-  console.log(temp + ' - ' + weatherData.city);
-
 
   const data = {
     labels: [

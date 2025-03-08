@@ -3,6 +3,8 @@ import { InputSelectContext } from "../context/InputSelectContext";
 import ChartBox from "./ChartBox.jsx";
 import WeatherData from "./WeatherData.jsx";
 
+
+
 export default function WeatherContainer({ message, setMessage }) {
   const [weatherData, setwWeatherData] = useState(null);
   const { currentCity } = useContext(InputSelectContext);
@@ -22,13 +24,14 @@ export default function WeatherContainer({ message, setMessage }) {
       .then((data) => {
         setwWeatherData({
           city: data.name,
-          temperature: Math.round(data.main.temp),
+          temp: Math.round(data.main.temp),
           feelsLike: Math.round(data.main.feels_like),
           description: data.weather[0].description,
           country: data.sys.country
         });
         setMessage("");
-        
+
+       // console.log(data);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
