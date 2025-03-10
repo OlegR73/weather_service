@@ -1,5 +1,4 @@
-//import { useContext } from "react";
-//import { InputSelectContext } from "../context/InputSelectContext";
+import { useState } from "react";
 import { Line } from "react-chartjs-2";
 import "chartjs-adapter-date-fns";
 import {
@@ -14,6 +13,7 @@ import {
   TimeScale,
 } from "chart.js";
 import WeatherData from "./WeatherData";
+import { useEffect } from "react";
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -25,15 +25,59 @@ ChartJS.register(
   Legend
 );
 
-export default function ChartBox({weatherData}) {
+async function fetchWeather(lat, long) {
+  // let long = 24.105078;
+  // let lat = 56.946285;
+
+  const params = {
+    latitude: lat,
+    longitude: long,
+    hourly: "temperature_2m",
+    models: "icon_seamless",
+  };
+
+  const url = `https://api.open-meteo.com/v1/forecast?latitude=${params.latitude}&longitude=${params.longitude}&hourly=${params.hourly}&models=${params.models}`;
+
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+
+    const timeArray = data.hourly.time;
+    const temperatureArray = data.hourly.temperature_2m;
+
+    const timeToDisplay = timeArray.filter((hour, index) => index % 4 === 0);
+    const tempToDisplay = temperatureArray.filter((temp, index) => index % 4 === 0);
+
+
+    return [timeToDisplay, tempToDisplay];
+  } catch (error) {
+    console.error("Error fetching weather data:", error);
+  }
+}
+
+export default function ChartBox({ weatherData }) {
   let temp = [];
 
   if (!WeatherData) {
     return <p>No weather data available</p>;
   }
-  let storedData = JSON.parse(localStorage.getItem(weatherData.city));
-  console.log( weatherData.city);
-  console.log(storedData);
+
+  //let storedData = JSON.parse(localStorage.getItem(weatherData.city));
+
+  useEffect(() => {
+     async function getWeather() {
+      const dataTempArr = await fetchWeather(weatherData.latitude, weatherData.longitude);
+      console.log("Weather Data:", dataTempArr[0]);
+
+
+      
+
+     }
+     getWeather();
+  }, []);
+
+  // console.log(weatherData.city + ": latitude - " + weatherData.latitude + ", longitude - " +  weatherData.longitude);
+  //console.log("Weather Data:", dataTempArr[0]);
 
   switch (weatherData.city) {
     case "Rīga":
@@ -97,7 +141,7 @@ export default function ChartBox({weatherData}) {
     responsive: true,
     animation: {
       duration: 1000,
-      easing: 'easeOutQuad', 
+      easing: "easeOutQuad",
     },
     scales: {
       x: {

@@ -9,14 +9,12 @@ function App() {
   const [message, setMessage] = useState('Loading weather data...');
   return (
     <InpSeLProvider>
-    
       <Header />
       <div className="main-container">
         <SideBar/>
         <WeatherContainer message={message} setMessage={setMessage} />
       </div>
       <Footer />
-  
     </InpSeLProvider>
   );
 }

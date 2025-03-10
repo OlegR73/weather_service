@@ -27,11 +27,14 @@ export default function WeatherContainer({ message, setMessage }) {
           temp: Math.round(data.main.temp),
           feelsLike: Math.round(data.main.feels_like),
           description: data.weather[0].description,
-          country: data.sys.country
+          country: data.sys.country,
+          latitude: data.coord.lat,
+          longitude: data.coord.lon,
         });
         setMessage("");
 
-       // console.log(data);
+        //console.log(data.coord);
+        // console.log(data.coord.lat);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
