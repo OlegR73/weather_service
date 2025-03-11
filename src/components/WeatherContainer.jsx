@@ -24,7 +24,7 @@ export default function WeatherContainer({ message, setMessage }) {
       .then((data) => {
         setwWeatherData({
           city: data.name,
-          temp: Math.round(data.main.temp),
+          temp: data.main.temp,
           feelsLike: Math.round(data.main.feels_like),
           description: data.weather[0].description,
           country: data.sys.country,
@@ -33,7 +33,7 @@ export default function WeatherContainer({ message, setMessage }) {
         });
         setMessage("");
 
-        //console.log(data.coord);
+        console.log(data.main.temp);
         // console.log(data.coord.lat);
       })
       .catch((error) => {

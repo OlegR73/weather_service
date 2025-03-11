@@ -2,7 +2,7 @@ export const cityArr = [
   "Riga",
   "Ventspils",
   "Liepaja",
-  "Rezekne",
+  "Daugavpils",
   "Tokyo",
   "London",
   "New York",

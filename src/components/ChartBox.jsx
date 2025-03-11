@@ -45,97 +45,58 @@ async function fetchWeather(lat, long) {
     const timeArray = data.hourly.time;
     const temperatureArray = data.hourly.temperature_2m;
 
-    const timeToDisplay = timeArray.filter((hour, index) => index % 4 === 0);
-    const tempToDisplay = temperatureArray.filter((temp, index) => index % 4 === 0);
-
+    const timeToDisplay = timeArray.filter((hour, index) => index % 2 === 0);
+    const tempToDisplay = temperatureArray.filter((temp, index) => index % 2 === 0);
 
     return [timeToDisplay, tempToDisplay];
+
   } catch (error) {
     console.error("Error fetching weather data:", error);
   }
 }
 
 export default function ChartBox({ weatherData }) {
+  const [chartData, setChartData] = useState(null);
   let temp = [];
 
-  if (!WeatherData) {
+  if (!weatherData) {
     return <p>No weather data available</p>;
   }
 
   //let storedData = JSON.parse(localStorage.getItem(weatherData.city));
 
   useEffect(() => {
-     async function getWeather() {
-      const dataTempArr = await fetchWeather(weatherData.latitude, weatherData.longitude);
-      console.log("Weather Data:", dataTempArr[0]);
+    async function getWeather() {
+      const fetchedData = await fetchWeather( weatherData.latitude, weatherData.longitude);
+      const todayTime = fetchedData[0].slice(0, 13);
+      const todayTemp = fetchedData[1].slice(0, 13);
 
+      // const time_labels = [];
+      // for (let i = 0; i < todayTime.length; i++) {
+      //   time_labels.push(todayTime[i].substring(11));
+      // }
 
-      
+       // console.log("todayTime:", time_labels);
+      // console.log("todayTemp:", todayTemp);
+     
 
-     }
-     getWeather();
-  }, []);
+      setChartData({
+        labels: todayTime,
+        datasets: [
+          {
+            label: `Temperature in ${weatherData.city} `,
+            data: todayTemp,
+            backgroundColor: "rgba(75,192,192,0.4)",
+            borderColor: "rgba(75,192,192,1)",
+            fill: false,
+          },
+        ],
+      });
+    }
+    getWeather();
+  }, [weatherData]);
 
-  // console.log(weatherData.city + ": latitude - " + weatherData.latitude + ", longitude - " +  weatherData.longitude);
-  //console.log("Weather Data:", dataTempArr[0]);
-
-  switch (weatherData.city) {
-    case "Rīga":
-      temp = [0, 25, 22, 13, -19, 10, weatherData.temp];
-      break;
-    case "Ventspils":
-      temp = [0, 25, 22, 13, 5, 10, weatherData.temp];
-      break;
-    case "Liepāja":
-      temp = [7, 5, -2, 13, 21, 11, weatherData.temp];
-      break;
-    case "Tokyo":
-      temp = [10, 25, 2, -13, -9, 10, weatherData.temp];
-      break;
-    case "Moscow":
-      temp = [11, 2, 22, -3, -14, -10, weatherData.temp];
-      break;
-    case "Milan":
-      temp = [10, 25, 17, 13, 19, 10, weatherData.temp];
-      break;
-    case "New York":
-      temp = [1, 21, 2, 13, -1, 5, weatherData.temp];
-      break;
-    case "Osaka":
-      temp = [1, 20, 9, 13, -9, 4, weatherData.temp];
-      break;
-    case "Athens":
-      temp = [6, 7, 15, -13, 9, -10, weatherData.temp];
-      break;
-    case "Palermo":
-      temp = [22, -5, 12, 13, 0, 1, weatherData.temp];
-      break;
-    default:
-      temp = [0, 2, 3, 13, -19, 16, weatherData.temp];
-      break;
-  }
-
-  const data = {
-    labels: [
-      "2024-03-01",
-      "2024-03-02",
-      "2024-03-03",
-      "2024-03-04",
-      "2024-03-05",
-      "2024-03-06",
-      "2024-03-07",
-      "2024-03-08",
-    ],
-    datasets: [
-      {
-        label: `Temperature in ${weatherData.city}`,
-        data: temp,
-        backgroundColor: "rgba(75,192,192,0.4)",
-        borderColor: "rgba(75,192,192,1)",
-        fill: false,
-      },
-    ],
-  };
+ 
 
   const options = {
     responsive: true,
@@ -147,7 +108,13 @@ export default function ChartBox({ weatherData }) {
       x: {
         type: "time",
         time: {
-          unit: "day",
+          unit: "hour",
+        },
+        ticks: {
+          source: "data",
+          autoSkip: true, // Показывает все временные метки
+          maxRotation: 45, // Наклон подписей для удобства чтения
+          minRotation: 0,
         },
       },
       y: {
@@ -161,5 +128,5 @@ export default function ChartBox({ weatherData }) {
     },
   };
 
-  return <Line data={data} options={options} />;
+  return chartData ? <Line data={chartData} options={options} /> : <p>Loading chart data...</p>;
 }
