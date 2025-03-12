@@ -213,14 +213,18 @@ header {
 
 
 footer {
-  background-color: #007bff;
+  background-color: #333;;
   color: white;
   text-align: center;
   padding: 10px;
   margin-top: auto;
 }
 
-
+.buttonPanelBox{
+  display: flex;
+  justify-content: end;
+  background-color: #333;
+}
 
 @media (max-width: 768px) {
   .main-container {

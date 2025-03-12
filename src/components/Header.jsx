@@ -15,8 +15,6 @@ export default function Header({ value, onClick } ) {
     <header>
       <img src={logo} alt="" />
       <h1>Weather Service</h1>
-      <Button children={'Today'} onClick={onClick} value={'Today'} />
-      <Button children={'Tomorrow'} onClick={onClick} value={'Tomorrow'} />
       <span>Time: {dateNow.toLocaleTimeString()}</span>
     </header>
   );

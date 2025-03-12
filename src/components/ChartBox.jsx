@@ -59,13 +59,22 @@ async function fetchWeather(lat, long) {
 export default function ChartBox({ weatherData, value }) {
  const [chartData, setChartData] = useState(null);
  let interval = [];
+ let unit = 'hour';
 
  switch (value) {
   case 'Today':
     interval = [0, 13];
+    unit = 'hour';
     break;
+
     case 'Tomorrow':
     interval = [12, 25];
+    unit = 'hour';
+    break;
+
+    case 'ThreeDays':
+    interval = [0, 37];
+    unit = 'day'
     break;
  }
 
@@ -120,14 +129,14 @@ export default function ChartBox({ weatherData, value }) {
   const options = {
     responsive: true,
     animation: {
-      duration: 1000,
+      duration: 500,
       easing: "easeOutQuad",
     },
     scales: {
       x: {
         type: "time",
         time: {
-          unit: "hour",
+          unit: unit,
         },
         ticks: {
           source: "data",
