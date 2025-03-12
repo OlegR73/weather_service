@@ -10,8 +10,9 @@ export default function WeatherData({message, setMessage, weatherData}) {
         //console.log(weatherData.city + " - " + weatherData.temp + ' - ' + dateTime.toLocaleTimeString());
         const dataToStore = {x : dateTime.toLocaleTimeString(), y : weatherData.temp}
         localStorage.setItem(weatherData.city, JSON.stringify(dataToStore));
+        
     }
-
+ 
     return (
         <div>
             {weatherData ? (

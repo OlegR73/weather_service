@@ -7,12 +7,21 @@ import { InpSeLProvider } from "./context/InputSelectContext.jsx";
 
 function App() {
   const [message, setMessage] = useState('Loading weather data...');
+  const [value, setValue] = useState('Today');
+  
+  function handleOnClick(e) {
+    const newValue = e.target.value; 
+    setValue(newValue)
+ 
+
+  }
+
   return (
     <InpSeLProvider>
-      <Header />
+      <Header value={value} onClick={handleOnClick}/>
       <div className="main-container">
         <SideBar/>
-        <WeatherContainer message={message} setMessage={setMessage} />
+        <WeatherContainer message={message} setMessage={setMessage} value={value}/>
       </div>
       <Footer />
     </InpSeLProvider>

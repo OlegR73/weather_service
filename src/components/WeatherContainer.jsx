@@ -5,12 +5,12 @@ import WeatherData from "./WeatherData.jsx";
 
 
 
-export default function WeatherContainer({ message, setMessage }) {
+export default function WeatherContainer({ message, setMessage, value }) {
   const [weatherData, setwWeatherData] = useState(null);
   const { currentCity } = useContext(InputSelectContext);
-
+  
   const apiKey = "2d271a197ce5aef1db71479108ed9538";
-
+  
   useEffect(() => {
     const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${currentCity}&appid=${apiKey}&units=metric`;
     setwWeatherData(null);
@@ -33,7 +33,7 @@ export default function WeatherContainer({ message, setMessage }) {
         });
         setMessage("");
 
-        console.log(data.main.temp);
+        
         // console.log(data.coord.lat);
       })
       .catch((error) => {
@@ -41,6 +41,7 @@ export default function WeatherContainer({ message, setMessage }) {
         setMessage("Incorrect input or network error.");
       });
   }, [currentCity, message]);
+
 
   return (
     <div className="weather-container">
@@ -52,7 +53,7 @@ export default function WeatherContainer({ message, setMessage }) {
         />
       </section>
       <section className="chart_box">
-        {weatherData ? (<ChartBox weatherData={weatherData} />) : (<p>Loading chart...</p>)}
+        {weatherData ? (<ChartBox weatherData={weatherData} value={value} />) : (<p>Loading chart...</p>)}
       </section>
     </div>
   );

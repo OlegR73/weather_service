@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Line } from "react-chartjs-2";
 import "chartjs-adapter-date-fns";
+import  getInterval  from "../functions.js"
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -42,11 +43,11 @@ async function fetchWeather(lat, long) {
     const response = await fetch(url);
     const data = await response.json();
 
-    const timeArray = data.hourly.time;
-    const temperatureArray = data.hourly.temperature_2m;
+    // const timeArray = data.hourly.time;
+    // const temperatureArray = data.hourly.temperature_2m;
 
-    const timeToDisplay = timeArray.filter((hour, index) => index % 2 === 0);
-    const tempToDisplay = temperatureArray.filter((temp, index) => index % 2 === 0);
+    const timeToDisplay = data.hourly.time.filter((hour, index) => index % 2 === 0);
+    const tempToDisplay = data.hourly.temperature_2m.filter((temp, index) => index % 2 === 0);
 
     return [timeToDisplay, tempToDisplay];
 
@@ -55,9 +56,21 @@ async function fetchWeather(lat, long) {
   }
 }
 
-export default function ChartBox({ weatherData }) {
-  const [chartData, setChartData] = useState(null);
-  let temp = [];
+export default function ChartBox({ weatherData, value }) {
+ const [chartData, setChartData] = useState(null);
+ let interval = [];
+
+ switch (value) {
+  case 'Today':
+    interval = [0, 13];
+    break;
+    case 'Tomorrow':
+    interval = [12, 25];
+    break;
+ }
+
+ console.log("interval:", interval);
+ console.log("Value from App in ChartBox:", value);
 
   if (!weatherData) {
     return <p>No weather data available</p>;
@@ -67,16 +80,22 @@ export default function ChartBox({ weatherData }) {
 
   useEffect(() => {
     async function getWeather() {
+      console.log("interval:", interval);
+      console.log("Value from App in ChartBox:", value);
+
       const fetchedData = await fetchWeather( weatherData.latitude, weatherData.longitude);
-      const todayTime = fetchedData[0].slice(0, 13);
-      const todayTemp = fetchedData[1].slice(0, 13);
+  
+      const todayTime = getInterval(fetchedData[0], interval[0], interval[1]);
+      const todayTemp = getInterval(fetchedData[1], interval[0], interval[1]);
+   
+
 
       // const time_labels = [];
       // for (let i = 0; i < todayTime.length; i++) {
       //   time_labels.push(todayTime[i].substring(11));
       // }
 
-       // console.log("todayTime:", time_labels);
+    //console.log("todayTime:", todayTime);
       // console.log("todayTemp:", todayTemp);
      
 
@@ -94,7 +113,7 @@ export default function ChartBox({ weatherData }) {
       });
     }
     getWeather();
-  }, [weatherData]);
+  }, [weatherData, value]);
 
  
 
@@ -112,8 +131,8 @@ export default function ChartBox({ weatherData }) {
         },
         ticks: {
           source: "data",
-          autoSkip: true, // Показывает все временные метки
-          maxRotation: 45, // Наклон подписей для удобства чтения
+          autoSkip: true, 
+          maxRotation: 45, 
           minRotation: 0,
         },
       },
