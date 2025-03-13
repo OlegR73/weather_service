@@ -30,11 +30,12 @@ export default function WeatherContainer({ message, setMessage, value }) {
           country: data.sys.country,
           latitude: data.coord.lat,
           longitude: data.coord.lon,
+          id: data.id,
         });
         setMessage("");
 
         
-        // console.log(data.coord.lat);
+         console.log(data.id);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
