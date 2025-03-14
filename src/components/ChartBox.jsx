@@ -78,8 +78,8 @@ export default function ChartBox({ weatherData, value }) {
     break;
  }
 
- console.log("interval:", interval);
- console.log("Value from App in ChartBox:", value);
+//  console.log("interval:", interval);
+//  console.log("Value from App in ChartBox:", value);
 
   if (!weatherData) {
     return <p>No weather data available</p>;
@@ -89,8 +89,8 @@ export default function ChartBox({ weatherData, value }) {
 
   useEffect(() => {
     async function getWeather() {
-      console.log("interval:", interval);
-      console.log("Value from App in ChartBox:", value);
+      // console.log("interval:", interval);
+      // console.log("Value from App in ChartBox:", value);
 
       const fetchedData = await fetchWeather( weatherData.latitude, weatherData.longitude);
   

@@ -12,7 +12,8 @@ export default function InputCity() {
 
     return(
         <form action="" onSubmit={handleClick}>
-            <input type="text" required />
+            <label htmlFor="city">Enter city</label>
+            <input type="text" name="city" required />
             <input className="button" type="submit" value="Submit" />
         </form>
         
