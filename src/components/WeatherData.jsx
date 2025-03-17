@@ -23,7 +23,7 @@ export default function WeatherData({message, weatherData, value}) {
                     <p>Feels like: {weatherData.feelsLike}°C</p>
                     <p>Description: {weatherData.description}</p>
                     {/* <button onClick={HandleSubmit} className="button" type="submit">Save data</button> */}
-                    <QrCode value={weatherData.id}/>
+                    <QrCode value={weatherData.city}/>
                 </div>
                
                 ) : (

@@ -9,12 +9,12 @@ import { InpSeLProvider } from "./context/InputSelectContext.jsx";
 function App() {
   const [message, setMessage] = useState('Loading weather data...');
   const [value, setValue] = useState('Today');
+  const [changedInterval, setchangedInterval] = useState(false);
   
   function handleOnClick(e) {
     const newValue = e.target.value; 
-    setValue(newValue)
- 
-
+    setValue(newValue);
+    setchangedInterval(!changedInterval);
   }
 
   return (
@@ -22,7 +22,7 @@ function App() {
       <Header />
       <ButtonPanel value={value} onClick={handleOnClick}/>
       <div className="main-container">
-        <SideBar/>
+        <SideBar changedInterval={changedInterval}/>
         <WeatherContainer message={message} setMessage={setMessage} value={value}/>
       </div>
       <Footer />

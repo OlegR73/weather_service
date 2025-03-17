@@ -1,9 +1,9 @@
 import OptionCity from "../OptionCity.jsx";
 import { cityArr } from "../../weather_data.js";
 import { InputSelectContext } from "../../context/InputSelectContext.jsx";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
-export default function SelectCity() {
+export default function SelectCity({changed, onChange}) {
   const { setSelectedCity } = useContext(InputSelectContext);
 
   function handleInput(e) {
@@ -12,8 +12,8 @@ export default function SelectCity() {
 
   return (
     <div>
-      <label htmlFor="city">My cities</label>
-      <select onChange={handleInput} name="city">
+      <label htmlFor="city">My cities:</label>
+      <select onChange={onChange} id="city">
         {cityArr.map((city, index) => (
           <OptionCity key={index} city={city} />
         ))}

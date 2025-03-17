@@ -59,6 +59,7 @@ header {
 }
 
 .weather_box {
+  display: flex;
   flex: 1;
   background: #f9f9f9;
   padding: 15px;
@@ -67,7 +68,6 @@ header {
 }
 
 .weather_box p {
-  
   font-size: 1.2rem;
   font-weight: 500; 
   color: #333; 
@@ -89,6 +89,9 @@ header {
   box-shadow: none;
 }
 
+.qrCodeBox{
+  margin-bottom: 0px;
+}
 
 .chart_box {
   flex: 2; 
@@ -137,7 +140,6 @@ header {
 
 
 .sidebar {
-
   background-color: #ffffff;
   padding: 15px;
   border-radius: 8px;

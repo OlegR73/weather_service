@@ -35,7 +35,7 @@ export default function WeatherContainer({ message, setMessage, value }) {
         setMessage("");
 
         
-         console.log(data.id);
+        //  console.log(data.id);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);

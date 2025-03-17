@@ -60,22 +60,35 @@ export default function ChartBox({ weatherData, value }) {
  const [chartData, setChartData] = useState(null);
  let interval = [];
  let unit = 'hour';
+ let additionalWord = '';
 
  switch (value) {
   case 'Today':
-    interval = [0, 13];
-    unit = 'hour';
-    break;
+      interval = [0, 13];
+      unit = 'hour';
+      break;
 
     case 'Tomorrow':
-    interval = [12, 25];
-    unit = 'hour';
-    break;
+      interval = [12, 25];
+      unit = 'hour';
+      break;
 
-    case 'ThreeDays':
-    interval = [0, 37];
-    unit = 'day'
-    break;
+    case 'Three Days':
+      interval = [0, 37];
+      unit = 'day';
+      additionalWord = 'next ';
+      break;
+
+    case 'Seven Days':
+      interval = [0, 84];
+      unit = 'day';
+      additionalWord = 'next ';
+      break;
+
+    default:
+      interval = [0, 13];
+      unit = 'hour';
+      break;
  }
 
 //  console.log("interval:", interval);
@@ -96,7 +109,7 @@ export default function ChartBox({ weatherData, value }) {
   
       const todayTime = getInterval(fetchedData[0], interval[0], interval[1]);
       const todayTemp = getInterval(fetchedData[1], interval[0], interval[1]);
-   
+
 
 
       // const time_labels = [];
@@ -112,7 +125,7 @@ export default function ChartBox({ weatherData, value }) {
         labels: todayTime,
         datasets: [
           {
-            label: `Temperature in ${weatherData.city} `,
+            label: `Temperature in ${weatherData.city} for ${additionalWord}${value}`,
             data: todayTemp,
             backgroundColor: "rgba(75,192,192,0.4)",
             borderColor: "rgba(75,192,192,1)",
