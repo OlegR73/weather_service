@@ -179,10 +179,10 @@ header {
   cursor: pointer;
   background-color: white;
   transition: all 0.3s ease-in-out;
-  box-sizing: border-box; /* Чтобы padding не увеличивал ширину */
+  box-sizing: border-box; 
 }
 
-/* Эффекты при наведении и фокусе */
+
 .sidebar select:hover,
 .sidebar input:hover {
   border-color: #007bff;
@@ -195,7 +195,7 @@ header {
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
-/* Кнопка отправки формы */
+
 .sidebar .button {
   width: 100%;
   padding: 10px;

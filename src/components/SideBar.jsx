@@ -1,5 +1,5 @@
 import SelectCity from "./Select/SelectCity.jsx";
-import InputCity from "./InputCity.jsx";
+import InputCity from "./Input/InputCity.jsx";
 import { InputSelectContext } from "../context/InputSelectContext.jsx";
 import { useContext, useState } from "react";
 

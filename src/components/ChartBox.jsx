@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Line } from "react-chartjs-2";
 import "chartjs-adapter-date-fns";
-import  getInterval  from "../functions.js"
+import  getInterval  from "../functions.js";
+
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -13,7 +14,7 @@ import {
   Legend,
   TimeScale,
 } from "chart.js";
-import WeatherData from "./WeatherData";
+
 import { useEffect } from "react";
 ChartJS.register(
   CategoryScale,
@@ -27,8 +28,6 @@ ChartJS.register(
 );
 
 async function fetchWeather(lat, long) {
-  // let long = 24.105078;
-  // let lat = 56.946285;
 
   const params = {
     latitude: lat,
@@ -42,9 +41,6 @@ async function fetchWeather(lat, long) {
   try {
     const response = await fetch(url);
     const data = await response.json();
-
-    // const timeArray = data.hourly.time;
-    // const temperatureArray = data.hourly.temperature_2m;
 
     const timeToDisplay = data.hourly.time.filter((hour, index) => index % 2 === 0);
     const tempToDisplay = data.hourly.temperature_2m.filter((temp, index) => index % 2 === 0);
@@ -85,40 +81,24 @@ export default function ChartBox({ weatherData, value }) {
       additionalWord = 'next ';
       break;
 
-    default:
-      interval = [0, 13];
-      unit = 'hour';
-      break;
+    // default:
+    //   interval = [0, 13];
+    //   unit = 'hour';
+    //   break;
  }
-
-//  console.log("interval:", interval);
-//  console.log("Value from App in ChartBox:", value);
 
   if (!weatherData) {
     return <p>No weather data available</p>;
   }
 
-  //let storedData = JSON.parse(localStorage.getItem(weatherData.city));
-
   useEffect(() => {
     async function getWeather() {
-      // console.log("interval:", interval);
-      // console.log("Value from App in ChartBox:", value);
+
 
       const fetchedData = await fetchWeather( weatherData.latitude, weatherData.longitude);
   
       const todayTime = getInterval(fetchedData[0], interval[0], interval[1]);
       const todayTemp = getInterval(fetchedData[1], interval[0], interval[1]);
-
-
-
-      // const time_labels = [];
-      // for (let i = 0; i < todayTime.length; i++) {
-      //   time_labels.push(todayTime[i].substring(11));
-      // }
-
-    //console.log("todayTime:", todayTime);
-      // console.log("todayTemp:", todayTemp);
      
 
       setChartData({
