@@ -15,9 +15,9 @@ export default function WeatherData({message, weatherData, value}) {
     // }
  
     return (
-        <div>
+        <div className="weather_info">
             {weatherData ? (
-                <div>
+                <div >
                     <p>{weatherData.city + " ( " + weatherData.country + " )"}</p>
                     <p>Temperature now: {weatherData.temp}°C </p>
                     <p>Feels like: {weatherData.feelsLike}°C</p>
