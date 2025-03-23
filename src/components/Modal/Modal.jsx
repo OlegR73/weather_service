@@ -7,8 +7,9 @@ export default function Modal({ isModalOpen, setIsModalOpen }) {
 const dialog = useRef();
 const input = useRef();
 const submit = useRef();
-const[value, setValue] = useState(null);
-const [answer, setAnswer] = useState("");
+let city = "Praha";
+
+const [answer, setAnswer] = useState([]);
 
 useEffect(() => {
     if (isModalOpen) {
@@ -18,38 +19,47 @@ useEffect(() => {
     }
 }, [isModalOpen]);
 
-function submitHandle(e) {
+async function submitHandle(e) {
     e.preventDefault();
-    setValue(input.current.value);
+    const question = input.current.value.trim();
+    if (!question) return;
+
+
     input.current.value = "";
     input.current.focus();
-}
-
-useEffect(() => {
-    if (!value) return;
-    askQuestion(value)
-      .then((res) => setAnswer(res))
-      .catch((err) => {
+    
+    try {
+        const res = await askQuestion(question);
+        setAnswer(res);
+      } catch (err) {
         console.error(err);
-        setAnswer("Request error");
-      });
-  }, [value]);
+        setAnswer([{ role: "system", content: "Request error" }]);
+      }
+   
+}
 
 
   return createPortal(
     <dialog ref={dialog} >
       <p className="closeModal" onClick={() => { setIsModalOpen(false)}}>X</p>
 
-      <div className="chat-response">
-        <h3>{value && value.trim() !== "" ? value : "Here will be the answer..."}</h3>
-        <div id="botResponse"> {answer} </div>
-      </div>
-
       <form action="" onSubmit={submitHandle} >
         <label htmlFor="city">Enter question:</label>
-        <input ref={input} type="text" id="city" required />
+        <input ref={input} type="text" id="city" value={`Weather in ${city}`} required />
         <input ref={submit} className="modalButton" type="submit" value="Submit" disabled={false} />
       </form>
+
+      {answer.map((msg, index) => (
+         <div id="botResponse" key={index}> {msg.content} </div>
+      ))}
+
+    {/* 
+      <div className="chat_response">
+        <div id="question">{value && value.trim() !== "" ? value : ""}</div>
+        <div id="botResponse"> {answer} </div>
+      </div> 
+    */}
+
     </dialog>, 
     document.getElementById('modal')
   );

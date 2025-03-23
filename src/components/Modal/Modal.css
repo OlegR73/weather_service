@@ -1,11 +1,11 @@
 dialog {
-    width: 70vw;
+    margin-top: 1vh;
+    width: 50vw;
     height: 70vh;
     border: none;
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
     background: linear-gradient(135deg, #e0f7fa, #80deea);
     color: #333;
     font-family: Arial, sans-serif;
@@ -14,11 +14,11 @@ dialog {
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1000;
-
-  
   }
   
 .closeModal {
+    margin-top: 5px;
+    margin-right: 5px;
     position: absolute;
     right: 20px;
     top: 5px;
@@ -33,7 +33,7 @@ dialog {
   }
 
 input{
-  margin: 5px;
+  margin: 10px;
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
@@ -46,8 +46,7 @@ input{
 }
 
 .modalButton{
-  width: 10%;
-  margin-right: 0px;
+  margin: 10px;
   padding: 10px;
   font-size: 1rem;
   border: none;
@@ -57,3 +56,34 @@ input{
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
 }
+
+#botResponse{
+  margin: 10px;
+  max-height: 50px;
+  overflow-y: auto;
+  overflow-x: hidden; 
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  background: linear-gradient(135deg, #bec4c5, #80deea);
+}
+
+
+  #question {
+    margin: 10px;
+    width: 80vh;
+    max-height: 50px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    background: linear-gradient(135deg, #d6cece, #d3f3f7);
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #333;
+  }

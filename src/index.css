@@ -71,6 +71,7 @@ header {
 .weather_info{
   width: 100%;
 }
+
 .weather_box p {
   font-size: 1.2rem;
   font-weight: 500; 

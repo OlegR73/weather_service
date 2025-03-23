@@ -24,13 +24,14 @@ export default async function askQuestion(input) {
     );
 
     const answer = response.data.choices[0].message.content;
-
     messages.push({
       role: "assistant",
-      content: response.data.choices[0].message.content,
+      content: answer,
     });
-    console.error(messages);
-    return answer;
+    
+    console.log(messages);
+    return [...messages];
+
   } catch (error) {
     console.error(error);
     return "Request error.";
