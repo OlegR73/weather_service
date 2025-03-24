@@ -50,7 +50,7 @@ export default function Modal({ isModalOpen, setIsModalOpen }) {
       </form>
       <div id="chat">
         {answer.slice().reverse().map((msg, index) => (
-          index % 2 == 0 ? <strong key={index} id="question">{msg.content}</strong> : <div  key={index} id="answer">{" "}{msg.content}{" "}</div>
+          msg.role === "user" ? <strong key={index} id="question">{msg.content}</strong> : <div  key={index} id="answer">{" "}{msg.content}{" "}</div>
         ))}
       </div>
     </dialog>,
