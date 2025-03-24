@@ -6,6 +6,7 @@ export default function InputCity({changed, changedInterval}) {
     const inputRef = useRef(null);
     const submitRef = useRef(null);
 
+    
     function handleClick(e) {
         e.preventDefault();
         setSelectedCity(e.target[0].value);

@@ -5,6 +5,7 @@ import axios from "axios";
 const messages = [];
 export default async function askQuestion(input) {
   const question = input;
+  
   messages.push({ role: "user", content: question });
 
   try {
