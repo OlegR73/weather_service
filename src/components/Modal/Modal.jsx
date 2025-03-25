@@ -12,7 +12,7 @@ export default function Modal({ isModalOpen, setIsModalOpen }) {
   const { currentCity } = useContext(InputSelectContext);
   let city = currentCity;
 
-  console.log(currentCity);
+  //console.log(currentCity);
   useEffect(() => {
     if (isModalOpen) {
       dialog.current.showModal();

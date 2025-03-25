@@ -25,7 +25,7 @@ export default async function askQuestion(input) {
     );
 
     const answer = response.data.choices[0].message.content;
-    messages.push({
+    messages.splice(messages.length - 1, 0, {
       role: "assistant",
       content: answer,
     });

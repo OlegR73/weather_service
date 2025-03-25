@@ -13,11 +13,13 @@ function App() {
   const [value, setValue] = useState('Today');
   const [changedInterval, setchangedInterval] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [activeButton, setActiveButton] = useState("Today");
   
   function handleOnClick(e) {
     const newValue = e.target.value; 
     setValue(newValue);
     setchangedInterval(!changedInterval);
+    setActiveButton(newValue);
   }
 
   function openModal() {
@@ -28,7 +30,7 @@ function App() {
     <InpSeLProvider>
       <Header />
       <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}/>
-      <ButtonPanel value={value} onClick={handleOnClick} openModal={openModal}/>
+      <ButtonPanel value={value} onClick={handleOnClick} openModal={openModal} activeButton={activeButton}/>
       <div className="main-container">
         <SideBar changedInterval={changedInterval}/>
         <WeatherContainer message={message} setMessage={setMessage} value={value}/>
