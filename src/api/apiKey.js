@@ -1,1 +1,1 @@
-export const apiKey = "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";
+export const apiKey = "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";

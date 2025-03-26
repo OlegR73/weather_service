@@ -246,13 +246,4 @@ footer {
   }
 }
 
-#botResponse{
-  max-height: 200px;       
-  overflow-y: auto;        
-  overflow-x: hidden;      
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  white-space: pre-wrap;  
-  word-wrap: break-word;
-}
+
