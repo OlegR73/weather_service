@@ -120,19 +120,6 @@ header {
 }
 
 
-@media (max-width: 768px) {
-  .main-container {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .weather-container {
-    flex-direction: row;
-    justify-content: center;
-  }
-}
-
 
 /* styles for text */
 .weather_box p,
@@ -244,6 +231,13 @@ footer {
     flex-direction: column;
     justify-content: center;
   }
+  .buttonPanelBox{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #333;
+  }
+
 }
 
 
