@@ -12,6 +12,7 @@
     "dev": "concurrently \"npm run start-client\" \"npm run start-server\""
   },
   "dependencies": {
+    "vite": "^5.0.0",
     "axios": "^1.8.4",
     "chart.js": "^4.4.8",
     "chartjs-adapter-date-fns": "^3.0.0",
@@ -31,6 +32,5 @@
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.4",
-    "vite": "^5.0.0"
   }
 }
