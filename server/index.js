@@ -3,17 +3,18 @@ const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
 const OpenAI = require('openai');
-
+const PORT = process.env.PORT || 5000;
 const app = express();
 const path = require('path');
 
 app.use(cors());
 app.use(express.json());
 
-app.use(express.static(path.join(__dirname, 'dist')));
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
-});
+
+
+app.get('/api/health', (req, res) => {
+    res.json({ status: 'ok', port: PORT });
+  });
 
 
 const openai = new OpenAI({
@@ -38,7 +39,11 @@ app.post('/api/chat', async (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 5000;
+app.use(express.static(path.join(__dirname, '../dist')));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../dist', 'index.html'));
+});
+
 app.listen(PORT, () => {
   console.log(`Backend listening at ${PORT}`);
 });
