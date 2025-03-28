@@ -40,6 +40,6 @@ app.post('/api/chat', async (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(' Backend listening at http://localhost:5000');
+  console.log(`Backend listening at ${PORT}`);
 });
 
