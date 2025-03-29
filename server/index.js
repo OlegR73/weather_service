@@ -4,20 +4,15 @@ const axios = require('axios');
 const cors = require('cors');
 const OpenAI = require('openai');
 const path = require('path');
-const { fileURLToPath } = require('url');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-// ES-модульный путь (__dirname для ESM)
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-// ✅ Раздаём клиентскую сборку
+// ✅ Отдаём статические файлы из dist
 app.use(express.static(path.join(__dirname, '../dist')));
 
-// ✅ SPA fallback — отдаём index.html
+// ✅ SPA fallback
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../dist', 'index.html'));
 });
@@ -43,6 +38,6 @@ app.post('/api/chat', async (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`Backend listening at http: ${PORT}`);
+  console.log(`Backend listening at http://localhost:${PORT}`);
 });
 
