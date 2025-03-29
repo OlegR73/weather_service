@@ -20,6 +20,7 @@ app.get('*', (req, res) => {
 // ✅ OpenAI
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
+  organization: 'org-w9p8rhkAvl9JcwRikM9wPO0g'
 });
 
 app.post('/api/chat', async (req, res) => {
