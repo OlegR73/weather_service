@@ -3,28 +3,38 @@ const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
 const OpenAI = require('openai');
+const path = require('path');
+const { fileURLToPath } = require('url');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
+// ES-модульный путь (__dirname для ESM)
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// ✅ Раздаём клиентскую сборку
+app.use(express.static(path.join(__dirname, '../dist')));
+
+// ✅ SPA fallback — отдаём index.html
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../dist', 'index.html'));
+});
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
 app.post('/api/chat', async (req, res) => {
-    const { messages } = req.body;
+  const { messages } = req.body;
   try {
-   
     const chatCompletion = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
       messages: messages,
       temperature: 0.7,
     });
-
     res.json(chatCompletion);
-    
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: err.message });
