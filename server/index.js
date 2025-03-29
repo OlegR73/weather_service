@@ -9,14 +9,15 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// ✅ Отдаём статические файлы из dist
+// ✅ Раздаём dist как клиент
 app.use(express.static(path.join(__dirname, '../dist')));
 
-// ✅ SPA fallback
+// ✅ SPA fallback (для React Router)
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../dist', 'index.html'));
 });
 
+// ✅ OpenAI
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
@@ -36,8 +37,10 @@ app.post('/api/chat', async (req, res) => {
   }
 });
 
+// ✅ Запуск сервера
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Backend listening at http://localhost:${PORT}`);
 });
+
 
