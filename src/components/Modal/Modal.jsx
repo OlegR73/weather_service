@@ -4,6 +4,7 @@ import askQuestion from "../../api/openAiRequest.js";
 import { InputSelectContext } from "../../context/InputSelectContext.jsx";
 import "./Modal.css";
 
+
 export default function Modal({ isModalOpen, setIsModalOpen }) {
   const dialog = useRef();
   const input = useRef();
@@ -12,7 +13,7 @@ export default function Modal({ isModalOpen, setIsModalOpen }) {
   const { currentCity } = useContext(InputSelectContext);
   let city = currentCity;
 
-  //console.log(currentCity);
+
   useEffect(() => {
     if (isModalOpen) {
       dialog.current.showModal();
@@ -29,10 +30,14 @@ export default function Modal({ isModalOpen, setIsModalOpen }) {
 
     input.current.value = "";
     input.current.focus();
+    submit.current.value = "Waiting an answer...";
+    submit.current.className = "modalButton loading";
+    // submit.current.className = "loading";
 
     try {
       const res = await askQuestion(question);
       setAnswer(res);
+      submit.current.className = "modalButton";
     } catch (err) {
       console.error(err);
       setAnswer([{ role: "system", content: "Request error" }]);
@@ -42,13 +47,12 @@ export default function Modal({ isModalOpen, setIsModalOpen }) {
   return createPortal(
     <dialog ref={dialog}>
       <p className="closeModal" onClick={() => {setIsModalOpen(false);}}>X</p>
-
       <form action="" onSubmit={submitHandle}>
         <label htmlFor="city">Enter question:</label>
         <input ref={input} type="text" id="city" required />
         <input ref={submit} className="modalButton" type="submit" value="Submit" disabled={false}/>
       </form>
-      <div id="chat">
+      <div className="chat">
         {answer.slice().reverse().map((msg, index) => (
           msg.role === "user" ? <strong key={index} id="question">{msg.content}</strong> : <div  key={index} id="answer">{" "}{msg.content}{" "}</div>
         ))}

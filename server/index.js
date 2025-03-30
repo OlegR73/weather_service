@@ -9,15 +9,15 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// ✅ Раздаём dist как клиент
+
 app.use(express.static(path.join(__dirname, '../dist')));
 
-// ✅ SPA fallback (для React Router)
+
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../dist', 'index.html'));
 });
 
-// ✅ OpenAI
+
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
   organization: 'org-w9p8rhkAvl9JcwRikM9wPO0g'

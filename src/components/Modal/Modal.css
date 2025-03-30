@@ -55,6 +55,11 @@ input{
   color: white;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
+  
+}
+
+.loading{
+  animation: loading 2s infinite;
 }
 
 #botResponse{
@@ -71,7 +76,7 @@ input{
 }
 
 
-  #question {
+  .question {
     margin: 10px;
     width: 80vh;
     max-height: 50px;
@@ -87,7 +92,7 @@ input{
     font-weight: bold;
     color: #333;
   }
-  #answer {
+  .answer {
     margin: 10px;
     padding: 8px;
     border: 1px solid #ccc;
@@ -97,7 +102,7 @@ input{
     background: linear-gradient(135deg, #d6cece, #d3f3f7);
     margin-bottom: 10px;
   }
-  #chat{
+  .chat{
     
     padding: 10px;
   }
@@ -107,5 +112,17 @@ input{
       width: 80vw; 
     }
   
+  }
+
+  @keyframes loading {
+    from{
+      opacity: 1;
+    }
+    to{
+      opacity: 1;
+    }
+    50%{
+      opacity: 0.3;
+    }
   }
   
