@@ -4,7 +4,6 @@ import askQuestion from "../../api/openAiRequest.js";
 import { InputSelectContext } from "../../context/InputSelectContext.jsx";
 import "./Modal.css";
 
-
 export default function Modal({ isModalOpen, setIsModalOpen }) {
   const dialog = useRef();
   const input = useRef();
@@ -12,7 +11,6 @@ export default function Modal({ isModalOpen, setIsModalOpen }) {
   const [answer, setAnswer] = useState([]);
   const { currentCity } = useContext(InputSelectContext);
   let city = currentCity;
-
 
   useEffect(() => {
     if (isModalOpen) {
@@ -46,16 +44,41 @@ export default function Modal({ isModalOpen, setIsModalOpen }) {
 
   return createPortal(
     <dialog ref={dialog}>
-      <p className="closeModal" onClick={() => {setIsModalOpen(false);}}>X</p>
+      <p
+        className="closeModal"
+        onClick={() => {
+          setIsModalOpen(false);
+        }}
+      >
+        X
+      </p>
       <form action="" onSubmit={submitHandle}>
-        <label htmlFor="city">Enter question:</label>
+        <label htmlFor="city">Enter :</label>
         <input ref={input} type="text" id="city" required />
-        <input ref={submit} className="modalButton" type="submit" value="Submit" disabled={false}/>
+        <input
+          ref={submit}
+          className="modalButton"
+          type="submit"
+          value="WOW"
+          disabled={false}
+        />
       </form>
       <div className="chat">
-        {answer.slice().reverse().map((msg, index) => (
-          msg.role === "user" ? <strong key={index} id="question">{msg.content}</strong> : <div  key={index} id="answer">{" "}{msg.content}{" "}</div>
-        ))}
+        {answer
+          .slice()
+          .reverse()
+          .map((msg, index) =>
+            msg.role === "user" ? (
+              <strong key={index} id="question">
+                {msg.content}
+              </strong>
+            ) : (
+              <div key={index} id="answer">
+                {" "}
+                {msg.content}{" "}
+              </div>
+            )
+          )}
       </div>
     </dialog>,
     document.getElementById("modal")

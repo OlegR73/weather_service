@@ -38,7 +38,7 @@ app.post('/api/chat', async (req, res) => {
   }
 });
 
-// ✅ Запуск сервера
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Backend listening at http://localhost:${PORT}`);
