@@ -8,12 +8,12 @@ export default async function askQuestion(input) {
   const question = input;
   
   
-  // if (messages.length === 0) {
-  //   messages.push({
-  //     role: "system",
-  //     content: "You are a helpful pharmacy assistant who knows the product range and prices. The pharmacy is called 'Our pharmacy'."
-  //   });
-  // }
+  if (messages.length === 0) {
+    messages.push({
+      role: "system",
+      content: "You are a helpful pharmacy assistant who knows the product range and prices. The pharmacy is called 'Our pharmacy'."
+    });
+  }
 
   messages.push({ role: "user", content: question });
 
