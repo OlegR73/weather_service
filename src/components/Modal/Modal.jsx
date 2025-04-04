@@ -53,7 +53,7 @@ export default function Modal({ isModalOpen, setIsModalOpen }) {
         <input ref={submit} className="modalButton" type="submit" value="Submit" disabled={false}/>
       </form>
       <div className="chat">
-        {answer.slice().reverse().map((msg, index) => (
+        {answer.slice().reverse().filter(msg => msg.role !== "system").map((msg, index) => (
           msg.role === "user" ? <strong key={index} id="question">{msg.content}</strong> : <div  key={index} id="answer">{" "}{msg.content}{" "}</div>
         ))}
       </div>
