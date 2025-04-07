@@ -12,7 +12,7 @@ export default function Modal({ isModalOpen, setIsModalOpen }) {
   const [answer, setAnswer] = useState([]);
   const { currentCity } = useContext(InputSelectContext);
   let city = currentCity;
-  const color = "red";
+  const col0r = "red";
 
 
   useEffect(() => {
@@ -54,7 +54,7 @@ export default function Modal({ isModalOpen, setIsModalOpen }) {
       </form>
       <div className="chat">
         {answer.slice().reverse().filter(msg => msg.role !== "system").map((msg, index) => (
-          msg.role === "user" ? <strong key={index} id="question">{msg.content}</strong> : <div  key={index} id="answer" style={msg.isError ? color : null }>{" "}{msg.content}{" "}</div>
+          msg.role === "user" ? <strong key={index} id="question">{msg.content}</strong> : <div  key={index} id="answer">{" "}{msg.content}{" "}</div>
         ))}
       </div>
     </dialog>,
