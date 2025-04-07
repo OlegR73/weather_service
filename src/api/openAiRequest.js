@@ -14,6 +14,7 @@ export default async function askQuestion(input) {
   //     content: "You are a helpful pharmacy assistant who knows the product range and prices. The pharmacy is called 'Our pharmacy'."
   //   });
   // }
+
   if (messages.length === 0) {
     messages.push({
       role: "system",
@@ -40,6 +41,11 @@ export default async function askQuestion(input) {
 
   } catch (error) {
     console.error(error);
-    return "Request error.";
+    messages.splice(messages.length - 1, 0, {
+      role: "assistant",
+      content: "Connection error !",
+    });
+
+    return [...messages];
   }
 }
