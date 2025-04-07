@@ -12,6 +12,7 @@ export default function Modal({ isModalOpen, setIsModalOpen }) {
   const [answer, setAnswer] = useState([]);
   const { currentCity } = useContext(InputSelectContext);
   let city = currentCity;
+  const color = "red";
 
 
   useEffect(() => {
@@ -32,7 +33,6 @@ export default function Modal({ isModalOpen, setIsModalOpen }) {
     input.current.focus();
     submit.current.value = "Waiting an answer...";
     submit.current.className = "modalButton loading";
-    // submit.current.className = "loading";
 
     try {
       const res = await askQuestion(question);
@@ -54,7 +54,7 @@ export default function Modal({ isModalOpen, setIsModalOpen }) {
       </form>
       <div className="chat">
         {answer.slice().reverse().filter(msg => msg.role !== "system").map((msg, index) => (
-          msg.role === "user" ? <strong key={index} id="question">{msg.content}</strong> : <div  key={index} id="answer">{" "}{msg.content}{" "}</div>
+          msg.role === "user" ? <strong key={index} id="question">{msg.content}</strong> : <div  key={index} id="answer" style={isError ? color : null }>{" "}{msg.content}{" "}</div>
         ))}
       </div>
     </dialog>,

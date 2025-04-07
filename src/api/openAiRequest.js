@@ -44,6 +44,7 @@ export default async function askQuestion(input) {
     messages.splice(messages.length - 1, 0, {
       role: "assistant",
       content: "Connection error !",
+      isError: true,
     });
 
     return [...messages];
