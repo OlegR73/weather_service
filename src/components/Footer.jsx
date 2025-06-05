@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
     <footer>
-      <p>All right reserved</p>
+      <p>All rights reserved</p>
     </footer>
   );
 }
